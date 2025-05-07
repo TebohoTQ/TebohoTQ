@@ -1,30 +1,26 @@
 #include <iostream>
-#include <unordered_map>
-#include <string>
-#include <cctype>
+#include <string> // For string type
 
 using namespace std;
 
-// Morse code map for A-Z and 0-9
-unordered_map<char, string> morseCode = {
-    {'A', ".-"},    {'B', "-..."},  {'C', "-.-."}, {'D', "-.."},
-    {'E', "."},     {'F', "..-."},  {'G', "--."},  {'H', "...."},
-    {'I', ".."},    {'J', ".---"},  {'K', "-.-"},  {'L', ".-.."},
-    {'M', "--"},    {'N', "-."},    {'O', "---"},  {'P', ".--."},
-    {'Q', "--.-"},  {'R', ".-."},   {'S', "..."},  {'T', "-"},
-    {'U', "..-"},   {'V', "...-"},  {'W', ".--"},  {'X', "-..-"},
-    {'Y', "-.--"},  {'Z', "--.."},
-    {'0', "-----"}, {'1', ".----"}, {'2', "..---"},{'3', "...--"},
-    {'4', "....-"}, {'5', "....."}, {'6', "-...."},{'7', "--..."},
-    {'8', "---.."}, {'9', "----."},
-    {' ', "/"} // Space between words
+// Morse code map for A-Z, 0-9, and space
+const string morseCode[] = {
+    ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", 
+    ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", // A-Z
+    "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.", // 0-9
+    "/" // space between words
 };
 
+// Function to convert text to Morse code
 void textToMorse(string input) {
     for (char c : input) {
-        c = toupper(c); // convert to uppercase
-        if (morseCode.find(c) != morseCode.end()) {
-            cout << morseCode[c] << " ";
+        c = toupper(c); // Convert to uppercase
+        if (c >= 'A' && c <= 'Z') {
+            cout << morseCode[c - 'A'] << " "; // Map A-Z
+        } else if (c >= '0' && c <= '9') {
+            cout << morseCode[c - '0' + 26] << " "; // Map 0-9
+        } else if (c == ' ') {
+            cout << morseCode[36] << " "; // Map space to "/"
         } else {
             cout << "? "; // Unknown character
         }
