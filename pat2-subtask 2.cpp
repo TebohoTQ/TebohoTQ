@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string> // For string type
 
-using namespace std;
+using namespace std,
 
 // Morse code map for A-Z, 0-9, and space
 const string morseCode[] = {
